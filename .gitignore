@@ -4,5 +4,4 @@ dist
 # Editor directories and files
 .vscode/*
 
-.env.development
-.env.production
+.env
