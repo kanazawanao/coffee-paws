@@ -9,6 +9,8 @@ export function useAuthApiState() {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser.uid);
+      } else {
+        setUser('');
       }
     });
   }, []);

@@ -8,6 +8,7 @@ export default defineConfig({
     alias: {
       app: path.resolve(__dirname, 'src/app'),
       api: path.resolve(__dirname, 'src/api'),
+      components: path.resolve(__dirname, 'src/components'),
       infrastructure: path.resolve(__dirname, 'src/infrastructure'),
       pages: path.resolve(__dirname, 'src/pages'),
       routes: path.resolve(__dirname, 'src/routes'),
