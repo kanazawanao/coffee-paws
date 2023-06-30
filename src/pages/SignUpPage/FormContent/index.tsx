@@ -1,8 +1,10 @@
 import React from 'react';
-import { useAuthApi } from 'api/hooks/AuthApi';
 
-export default function FormContent() {
-  const { signUpRequest } = useAuthApi();
+type Props = {
+  onSubmit: (email: string, password: string) => void;
+};
+
+export default function FormContent({ onSubmit }: Props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -23,10 +25,9 @@ export default function FormContent() {
   const handleSubmit = React.useCallback(
     async (event: React.FormEvent) => {
       event.preventDefault();
-      await signUpRequest(email, password);
-      console.log(email, password);
+      onSubmit(email, password);
     },
-    [email, password, signUpRequest],
+    [email, onSubmit, password],
   );
 
   return (
