@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import ApiClient from '../../ApiClient';
-import { auth } from 'infrastructure/firebase';
+import { auth } from 'config/firebase';
 
 class SignInApiClient extends ApiClient {
   async signIn(email: string, password: string) {

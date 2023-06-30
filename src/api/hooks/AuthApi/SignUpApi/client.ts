@@ -1,6 +1,6 @@
 import ApiClient from 'api/hooks/ApiClient';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from 'infrastructure/firebase';
+import { auth } from 'config/firebase';
 
 class SignUpApiClient extends ApiClient {
   async signUp(email: string, password: string) {

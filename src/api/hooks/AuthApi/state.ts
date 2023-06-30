@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from 'infrastructure/firebase';
+import { auth } from 'config/firebase';
 import React from 'react';
 
 export function useAuthApiState() {
