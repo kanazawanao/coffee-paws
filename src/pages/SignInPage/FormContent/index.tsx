@@ -1,3 +1,5 @@
+import Form from 'components/forms/Form';
+import InputText from 'components/forms/InputText';
 import React from 'react';
 
 type Props = {
@@ -7,39 +9,21 @@ export default function FormContent({ onSubmit }: Props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const handleEmailChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setEmail(event.target.value);
-    },
-    [],
-  );
-
-  const handlePasswordChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value);
-    },
-    [],
-  );
-
-  const handleSubmit = React.useCallback(
-    async (event: React.FormEvent) => {
-      event.preventDefault();
-      onSubmit(email, password);
-    },
-    [email, onSubmit, password],
-  );
+  const handleSubmit = React.useCallback(() => {
+    onSubmit(email, password);
+  }, [email, onSubmit, password]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <div>
         <label htmlFor='email'>メールアドレス</label>
-        <input id='email' type='email' onChange={handleEmailChange} />
+        <InputText id='email' type='email' onChange={setEmail} />
       </div>
       <div>
         <label htmlFor='password'>パスワード</label>
-        <input id='password' type='password' onChange={handlePasswordChange} />
+        <InputText id='password' type='password' onChange={setPassword} />
       </div>
       <button>サインインする</button>
-    </form>
+    </Form>
   );
 }

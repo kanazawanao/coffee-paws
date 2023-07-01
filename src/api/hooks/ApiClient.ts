@@ -1,6 +1,6 @@
 import Axios, { AxiosInstance } from 'axios';
 import React from 'react';
-import { generateApiError } from './ApiError';
+import { generateApiError } from '../ApiError';
 
 type ApiFunctionType<ReturnType> = (...args: any[]) => Promise<ReturnType>;
 

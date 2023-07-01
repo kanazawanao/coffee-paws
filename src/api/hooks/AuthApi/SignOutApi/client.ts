@@ -1,6 +1,6 @@
 import ApiClient from 'api/hooks/ApiClient';
 import { signOut as signOutFromFirebase } from 'firebase/auth';
-import { auth } from 'infrastructure/firebase';
+import { auth } from 'config/firebase';
 
 class SignOutApiClient extends ApiClient {
   async signOut() {

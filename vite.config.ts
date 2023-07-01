@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      app: path.resolve(__dirname, 'src/app'),
       api: path.resolve(__dirname, 'src/api'),
+      app: path.resolve(__dirname, 'src/app'),
+      config: path.resolve(__dirname, 'src/config'),
       components: path.resolve(__dirname, 'src/components'),
-      infrastructure: path.resolve(__dirname, 'src/infrastructure'),
       pages: path.resolve(__dirname, 'src/pages'),
       routes: path.resolve(__dirname, 'src/routes'),
     },
