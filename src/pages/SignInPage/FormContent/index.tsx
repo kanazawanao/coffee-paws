@@ -1,3 +1,5 @@
+import Button from 'components/Button';
+import GridContainer from 'components/GridContainer';
 import Form from 'components/forms/Form';
 import InputText from 'components/forms/InputText';
 import React from 'react';
@@ -15,15 +17,22 @@ export default function FormContent({ onSubmit }: Props) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor='email'>メールアドレス</label>
-        <InputText id='email' type='email' onChange={setEmail} />
-      </div>
-      <div>
-        <label htmlFor='password'>パスワード</label>
-        <InputText id='password' type='password' onChange={setPassword} />
-      </div>
-      <button>サインインする</button>
+      <GridContainer>
+        <InputText
+          id='email'
+          type='email'
+          label='メールアドレス'
+          onChange={setEmail}
+        />
+
+        <InputText
+          id='password'
+          type='password'
+          label='パスワード'
+          onChange={setPassword}
+        />
+        <Button type='submit'>サインイン</Button>
+      </GridContainer>
     </Form>
   );
 }
