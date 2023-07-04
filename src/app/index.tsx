@@ -1,3 +1,4 @@
+import 'styles/reset.css';
 import Header from 'components/Header';
 import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';

@@ -1,0 +1,14 @@
+.text {
+  display: inherit;
+  width: 100%;
+}
+
+.inputText {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  height: 46px;
+  padding: 0 1rem;
+  &:focus {
+    border: 1px solid #888;
+  }
+}
