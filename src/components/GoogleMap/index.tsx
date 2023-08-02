@@ -6,9 +6,11 @@ import { GoogleMapsContext } from './context';
 import styles from './style.module.css';
 
 type Props = {
+  lat: number;
+  lng: number;
   children: React.ReactNode;
 };
-export default function GoogleMaps({ children }: Props) {
+export default function GoogleMaps({ lat, lng, children }: Props) {
   const googleMapsElement = React.useRef<HTMLDivElement>(null);
   const [googleMap, setGoogleMap] = React.useState<google.maps.Map | null>(
     null,
@@ -17,6 +19,7 @@ export default function GoogleMaps({ children }: Props) {
     React.useState<boolean>(false);
 
   const initGoogleMapsApi = React.useCallback(async () => {
+    console.log(lat, lng);
     const loader = new Loader({
       apiKey: VITE_GOOGLE_MAPS_API_KEY,
       version: 'weekly',
@@ -26,10 +29,10 @@ export default function GoogleMaps({ children }: Props) {
     });
     const mapOptions = {
       center: {
-        lat: 0,
-        lng: 0,
+        lat: lat,
+        lng: lng,
       },
-      zoom: 4,
+      zoom: 18,
     };
     loader
       .importLibrary('maps')
@@ -42,7 +45,7 @@ export default function GoogleMaps({ children }: Props) {
         console.log(e);
       });
     setGoogleMapsApiLoaded(true);
-  }, []);
+  }, [lat, lng]);
 
   React.useEffect(() => {
     if (googleMapsElement && googleMapsElement.current) {

@@ -6,5 +6,7 @@ export function fromApiPlace(apiPlace: ApiPlace): Place {
     placeId: apiPlace.placeId || '',
     name: apiPlace.name || '',
     icon: apiPlace.icon || '',
+    lat: apiPlace.lat || 0,
+    lng: apiPlace.lng || 0,
   };
 }

@@ -3,15 +3,19 @@ import Form from 'components/forms/Form';
 import InputText from 'components/forms/InputText';
 import React from 'react';
 
-export default function PlaceSearchForm() {
+type Props = {
+  onSubmit: (lat: number, lng: number) => void;
+};
+export default function SearchNearbyForm({ onSubmit }: Props) {
   const [keyword, setKeyword] = React.useState('');
   const { searchNearby } = usePlaceSearchApi();
 
   const handleSubmit = React.useCallback(async () => {
-    console.log(keyword);
     const result = await searchNearby(keyword);
-    console.log(result);
-  }, [keyword, searchNearby]);
+    if (result.records.length > 0) {
+      onSubmit(result.records[0].lat, result.records[0].lng);
+    }
+  }, [keyword, onSubmit, searchNearby]);
 
   return (
     <Form onSubmit={handleSubmit}>
