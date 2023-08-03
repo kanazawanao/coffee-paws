@@ -1,16 +1,18 @@
 import { useApiClient } from 'api/hooks/ApiClient';
 import { client } from './client';
 import React from 'react';
+import { PlacesApiState } from '../state';
 
-export function useSearchNearby() {
+export function useSearchNearby({ setPlaces }: PlacesApiState) {
   const { callApi } = useApiClient(client.searchNearby);
 
   const searchNearby = React.useCallback(
     async (keyword: string) => {
       const response = await callApi(keyword);
+      setPlaces(response.records);
       return response;
     },
-    [callApi],
+    [callApi, setPlaces],
   );
 
   return {

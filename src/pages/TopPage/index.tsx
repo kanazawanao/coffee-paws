@@ -1,28 +1,23 @@
-import GoogleMaps from 'components/GoogleMap';
+import { usePlacesApi } from 'api/hooks/PlaceApi';
 import SearchNearbyForm from './SearchNearbyForm';
 import React from 'react';
 
 export default function TopPage() {
-  const [lat, setLat] = React.useState(35.652832);
-  const [lng, setLng] = React.useState(139.839478);
-  React.useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLat(position.coords.latitude);
-      setLng(position.coords.longitude);
-    });
-  }, []);
+  const { places, searchNearby } = usePlacesApi();
 
-  const handleSubmit = React.useCallback((lat: number, lng: number) => {
-    setLat(lat);
-    setLng(lng);
-  }, []);
+  const handleSubmit = React.useCallback(
+    (keyword: string) => {
+      searchNearby(keyword);
+    },
+    [searchNearby],
+  );
 
   return (
     <>
-      <GoogleMaps lat={lat} lng={lng}>
-        <></>
-      </GoogleMaps>
       <SearchNearbyForm onSubmit={handleSubmit} />
+      {places.map((place) => (
+        <div key={place.placeId}>{place.name}</div>
+      ))}
     </>
   );
 }
