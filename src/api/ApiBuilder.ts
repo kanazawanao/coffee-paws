@@ -6,7 +6,7 @@ const buildTripigApi = async (basePath: string) => {
   });
   const tripigApi = new TripigApi(config);
   return {
-    getNearby: tripigApi.getNearby.bind(tripigApi),
+    searchNearby: tripigApi.searchNearby.bind(tripigApi),
   };
 };
 
