@@ -1,8 +1,8 @@
-# Tripig Project
+# Coffee Paws Project
 
 ## Overview
 
-tripig です
+Coffee Paws です
 https://tri-pig.web.app/
 
 ## How to start
