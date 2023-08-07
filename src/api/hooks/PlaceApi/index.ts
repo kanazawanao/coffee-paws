@@ -5,7 +5,7 @@ import { usePlacesApiState } from './state';
 
 export function usePlacesApi() {
   const state = usePlacesApiState();
-  const { searchNearby } = useSearchNearby(state);
+  const { searchNearby, searchNearbyMore } = useSearchNearby(state);
   const { getPlaceTypes } = usePlaceTypesApi(state);
 
   React.useEffect(() => {
@@ -15,6 +15,8 @@ export function usePlacesApi() {
   return {
     places: state.places,
     plactTypes: state.placeTypes,
+    nextPageToken: state.nextPageToken,
     searchNearby,
+    searchNearbyMore,
   };
 }

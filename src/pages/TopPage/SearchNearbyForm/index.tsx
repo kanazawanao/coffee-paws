@@ -13,7 +13,6 @@ export default function SearchNearbyForm({ placeTypes, onSubmit }: Props) {
   const [placeType, setPlaceType] = React.useState('');
   const placeTypeSelectOptions = createPlaceTypeSelectOptions(placeTypes);
 
-  console.log(placeTypeSelectOptions);
   const handleSubmit = React.useCallback(async () => {
     onSubmit(keyword, placeType);
   }, [keyword, onSubmit, placeType]);
