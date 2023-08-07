@@ -1,6 +1,8 @@
 import Place from 'models/Place';
 import React from 'react';
 
+import styles from './style.module.css';
+
 type Props = {
   place: Place;
   onClick: (place: Place) => void;
@@ -11,9 +13,12 @@ export default function PlaceView({ place, onClick }: Props) {
   }, [onClick, place]);
 
   return (
-    <div onClick={handleClick}>
+    <div className={styles.container} onClick={handleClick}>
+      <img src={place.icon} />
       <div>{place.name}</div>
-      {place.photoUrls.length > 0 && <img src={place.photoUrls[0]} />}
+      {place.photoUrls.map((photoUrl, index) => (
+        <img key={index} src={photoUrl} />
+      ))}
     </div>
   );
 }
