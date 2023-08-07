@@ -9,6 +9,7 @@ export function fromApiPlace(apiPlace: ApiPlace): Place {
     icon: apiPlace.icon || '',
     lat: apiPlace.lat || 0,
     lng: apiPlace.lng || 0,
+    photoUrls: apiPlace.photoUrls || [],
   };
 }
 

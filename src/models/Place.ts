@@ -4,4 +4,5 @@ export default interface Place {
   icon: string;
   lat: number;
   lng: number;
+  photoUrls: string[];
 }

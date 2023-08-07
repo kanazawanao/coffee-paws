@@ -1,6 +1,7 @@
 import { usePlacesApi } from 'api/hooks/PlaceApi';
 import SearchNearbyForm from './SearchNearbyForm';
 import Button from 'components/Button';
+import PlaceView from './PlaceView';
 
 export default function TopPage() {
   const { places, nextPageToken, plactTypes, searchNearby, searchNearbyMore } =
@@ -10,7 +11,7 @@ export default function TopPage() {
     <>
       <SearchNearbyForm placeTypes={plactTypes} onSubmit={searchNearby} />
       {places.map((place) => (
-        <div key={place.placeId}>{place.name}</div>
+        <PlaceView key={place.placeId} place={place} />
       ))}
       {nextPageToken && <Button onClick={searchNearbyMore}>もっと見る</Button>}
     </>
