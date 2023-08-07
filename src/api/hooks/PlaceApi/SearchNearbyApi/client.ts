@@ -4,9 +4,9 @@ import { SearchResult } from 'models/SearchResult';
 import { fromApiPlace } from '../converter';
 
 class SearchNearby extends ApiClient {
-  public async searchNearby(keyword: string) {
+  public async searchNearby(keyword: string, placeType: string) {
     const client = await this.buildApi();
-    const res = await client.searchNearby(keyword);
+    const res = await client.searchNearby(keyword, placeType);
     const result: SearchResult<Place> = {
       records: res.data.results.map(fromApiPlace),
       nextPageToken: res.data.nextPageToken,

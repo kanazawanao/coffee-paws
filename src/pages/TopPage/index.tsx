@@ -1,20 +1,12 @@
 import { usePlacesApi } from 'api/hooks/PlaceApi';
 import SearchNearbyForm from './SearchNearbyForm';
-import React from 'react';
 
 export default function TopPage() {
-  const { places, searchNearby } = usePlacesApi();
-
-  const handleSubmit = React.useCallback(
-    (keyword: string) => {
-      searchNearby(keyword);
-    },
-    [searchNearby],
-  );
+  const { places, plactTypes, searchNearby } = usePlacesApi();
 
   return (
     <>
-      <SearchNearbyForm onSubmit={handleSubmit} />
+      <SearchNearbyForm placeTypes={plactTypes} onSubmit={searchNearby} />
       {places.map((place) => (
         <div key={place.placeId}>{place.name}</div>
       ))}

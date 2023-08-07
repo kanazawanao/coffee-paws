@@ -7,8 +7,8 @@ export function useSearchNearby({ setPlaces }: PlacesApiState) {
   const { callApi } = useApiClient(client.searchNearby);
 
   const searchNearby = React.useCallback(
-    async (keyword: string) => {
-      const response = await callApi(keyword);
+    async (keyword: string, placeType: string) => {
+      const response = await callApi(keyword, placeType);
       setPlaces(response.records);
       return response;
     },

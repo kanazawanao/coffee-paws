@@ -1,18 +1,21 @@
 import Form from 'components/forms/Form';
 import InputSelect from 'components/forms/InputSelect';
 import InputText from 'components/forms/InputText';
+import PlaceType, { createPlaceTypeSelectOptions } from 'models/PlaceType';
 import React from 'react';
 
 type Props = {
-  onSubmit: (keyword: string) => void;
+  placeTypes: PlaceType[];
+  onSubmit: (keyword: string, placeType: string) => void;
 };
-export default function SearchNearbyForm({ onSubmit }: Props) {
+export default function SearchNearbyForm({ placeTypes, onSubmit }: Props) {
   const [keyword, setKeyword] = React.useState('');
   const [placeType, setPlaceType] = React.useState('');
+  const placeTypeSelectOptions = createPlaceTypeSelectOptions(placeTypes);
 
+  console.log(placeTypeSelectOptions);
   const handleSubmit = React.useCallback(async () => {
-    console.log(placeType);
-    onSubmit(keyword);
+    onSubmit(keyword, placeType);
   }, [keyword, onSubmit, placeType]);
 
   return (
@@ -20,10 +23,7 @@ export default function SearchNearbyForm({ onSubmit }: Props) {
       <InputSelect
         id='placeType'
         label='カテゴリ'
-        options={[
-          { label: 'test', value: 'test' },
-          { label: '1', value: '2' },
-        ]}
+        options={placeTypeSelectOptions}
         onChange={setPlaceType}
       />
       <InputText
