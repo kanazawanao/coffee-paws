@@ -6,7 +6,7 @@ import { fromApiPlace } from '../converter';
 class SearchNearby extends ApiClient {
   public async searchNearby(
     keyword: string,
-    placeType: string,
+    placeType?: string,
     nextPageToken?: string,
   ) {
     const client = await this.buildApi();

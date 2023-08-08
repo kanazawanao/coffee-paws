@@ -16,12 +16,12 @@ export function useSearchNearby({
   const { callApi } = useApiClient(client.searchNearby);
 
   const searchNearby = React.useCallback(
-    async (keyword: string, placeType: string) => {
+    async (keyword: string, placeType?: string) => {
       const response = await callApi(keyword, placeType);
       setPlaces(response.records);
       setNextPageToken(response.nextPageToken || '');
       setSearchedKeyword(keyword);
-      setSearchedPlaceType(placeType);
+      setSearchedPlaceType(placeType || '');
       return response;
     },
     [

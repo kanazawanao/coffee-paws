@@ -7,9 +7,16 @@ type Props = {
   id: string;
   type: 'text' | 'email' | 'password';
   label?: string;
+  placeholder?: string;
   onChange: (value: string) => void;
 };
-export default function InputText({ id, type, label, onChange }: Props) {
+export default function InputText({
+  id,
+  type,
+  label,
+  placeholder,
+  onChange,
+}: Props) {
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       onChange(event.target.value);
@@ -23,6 +30,7 @@ export default function InputText({ id, type, label, onChange }: Props) {
         className={styles.inputText}
         id={id}
         type={type}
+        placeholder={placeholder}
         onChange={handleChange}
       />
     </div>

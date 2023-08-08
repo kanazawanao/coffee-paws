@@ -8,7 +8,7 @@ import GoogleMaps from 'components/GoogleMap';
 import GoogleMapMarker from 'components/GoogleMap/GoogleMapMarker';
 
 export default function TopPage() {
-  const { places, nextPageToken, plactTypes, searchNearby, searchNearbyMore } =
+  const { places, nextPageToken, searchNearby, searchNearbyMore } =
     usePlacesApi();
   const [selectedPlaces, setSelectedPlaces] = React.useState<Place[]>([]);
 
@@ -33,7 +33,7 @@ export default function TopPage() {
 
   return (
     <>
-      <SearchNearbyForm placeTypes={plactTypes} onSubmit={searchNearby} />
+      <SearchNearbyForm onSubmit={searchNearby} />
       <GoogleMaps lat={35.6812} lng={139.7671}>
         {selectedPlaces.map((selectedPlace) => (
           <GoogleMapMarker

@@ -1,36 +1,28 @@
+import Button from 'components/Button';
 import Form from 'components/forms/Form';
-import InputSelect from 'components/forms/InputSelect';
 import InputText from 'components/forms/InputText';
-import PlaceType, { createPlaceTypeSelectOptions } from 'models/PlaceType';
 import React from 'react';
 
 type Props = {
-  placeTypes: PlaceType[];
-  onSubmit: (keyword: string, placeType: string) => void;
+  onSubmit: (keyword: string) => void;
 };
-export default function SearchNearbyForm({ placeTypes, onSubmit }: Props) {
+export default function SearchNearbyForm({ onSubmit }: Props) {
   const [keyword, setKeyword] = React.useState('');
-  const [placeType, setPlaceType] = React.useState('');
-  const placeTypeSelectOptions = createPlaceTypeSelectOptions(placeTypes);
 
   const handleSubmit = React.useCallback(async () => {
-    onSubmit(keyword, placeType);
-  }, [keyword, onSubmit, placeType]);
+    onSubmit(keyword);
+  }, [keyword, onSubmit]);
 
   return (
     <Form onSubmit={handleSubmit}>
-      <InputSelect
-        id='placeType'
-        label='カテゴリ'
-        options={placeTypeSelectOptions}
-        onChange={setPlaceType}
-      />
       <InputText
         id='keyword'
         type='text'
-        label='キーワード'
+        label='地名'
+        placeholder='荻窪'
         onChange={setKeyword}
       />
+      <Button type='submit'>コーヒー豆売ってそうなところを検索する</Button>
     </Form>
   );
 }
