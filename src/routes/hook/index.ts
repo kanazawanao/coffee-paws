@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as paths from '../paths';
 import React from 'react';
 
-export function useTripigNavigate() {
+export function useCoffeePawsNavigate() {
   const navigate = useNavigate();
 
   /**

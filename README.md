@@ -3,7 +3,7 @@
 ## Overview
 
 Coffee Paws です
-https://tri-pig.web.app/
+https://coffee-paws.web.app/
 
 ## How to start
 
@@ -12,6 +12,9 @@ https://tri-pig.web.app/
 ```bash
 # .envファイルを生成する
 cp .env.defaults .env
+
+git submodule update --init
+docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v6.6.0 generate -g typescript-axios -i /local/api/openapi/openapi.yml -o /local/src/api/clients
 
 npm install
 npm run dev

@@ -1,11 +1,11 @@
 import { useAuthApi } from 'api/hooks/AuthApi';
 
 import styles from './style.module.css';
-import { useTripigNavigate } from 'routes/hook';
+import { useCoffeePawsNavigate } from 'routes/hook';
 
 export default function Headre() {
   const { user, signOut } = useAuthApi();
-  const { goToSignInPage, goToSignUpPage } = useTripigNavigate();
+  const { goToSignInPage, goToSignUpPage } = useCoffeePawsNavigate();
   return (
     <div className={styles.header}>
       {user && <div onClick={signOut}>ログアウト</div>}

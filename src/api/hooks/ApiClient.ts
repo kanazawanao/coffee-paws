@@ -17,7 +17,7 @@ export default class ApiClient {
   }
 
   async buildApi() {
-    return ApiBuilder.buildTripigApi(API_URL);
+    return ApiBuilder.buildCoffeePawsApi(API_URL);
   }
 }
 
