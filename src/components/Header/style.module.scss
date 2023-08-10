@@ -1,0 +1,17 @@
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.item {
+  cursor: pointer;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 48px;
+}

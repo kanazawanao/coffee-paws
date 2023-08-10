@@ -3,7 +3,7 @@ import { VITE_GOOGLE_MAPS_API_KEY } from 'app/env';
 import React from 'react';
 import { GoogleMapsContext } from './context';
 
-import styles from './style.module.css';
+import styles from './style.module.scss';
 
 type Props = {
   lat: number;

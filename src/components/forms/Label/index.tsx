@@ -1,4 +1,4 @@
-import styles from './style.module.css';
+import styles from './style.module.scss';
 
 type Props = {
   id?: string;

@@ -1,7 +1,7 @@
 import Place from 'models/Place';
 import React from 'react';
 
-import styles from './style.module.css';
+import styles from './style.module.scss';
 
 type Props = {
   place: Place;
