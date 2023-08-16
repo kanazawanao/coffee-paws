@@ -39,30 +39,43 @@ export default function FlavorWheel() {
   const handleFlavorClick = React.useCallback((flavor: Flavor) => {
     console.log(flavor);
   }, []);
+
+  const handleMouseover = React.useCallback((flavor: Flavor) => {
+    console.log(flavor);
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
         <DonutChart
-          innerRadius={40}
-          outerRadius={100}
+          width={600}
+          height={600}
+          innerRadius={20}
+          outerRadius={120}
           items={items}
           onFlavorClick={handleFlavorClick}
+          onMouseover={handleMouseover}
         />
       </div>
       <div className={styles.center}>
         <DonutChart
-          innerRadius={100}
-          outerRadius={160}
+          width={600}
+          height={600}
+          innerRadius={120}
+          outerRadius={200}
           items={secondItems}
           onFlavorClick={handleFlavorClick}
+          onMouseover={handleMouseover}
         />
       </div>
       <div className={styles.outer}>
         <DonutChart
-          innerRadius={160}
-          outerRadius={170}
+          width={600}
+          height={600}
+          innerRadius={200}
+          outerRadius={280}
           items={thirdItems}
           onFlavorClick={handleFlavorClick}
+          onMouseover={handleMouseover}
         />
       </div>
     </div>

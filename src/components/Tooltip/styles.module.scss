@@ -1,0 +1,76 @@
+$COLOR_TOOLTIP_BACKGROUND: #777;
+$TRIANGLE_SIZE: 10px;
+
+.tooltip {
+  position: relative;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+
+  .description {
+    display: none;
+  }
+
+  &:hover .description {
+    display: inline-block;
+  }
+
+  > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background-color: #777;
+    border-radius: 50%;
+
+    > svg {
+      fill: #fff;
+    }
+  }
+}
+
+// Tooltip表示部分に関する定義
+.description {
+  position: absolute;
+  width: 220px;
+  padding: 8px 16px;
+  background-color: $COLOR_TOOLTIP_BACKGROUND;
+  border-radius: 6px;
+
+  &::before {
+    position: absolute;
+    margin-left: -$TRIANGLE_SIZE;
+    content: '';
+    border: $TRIANGLE_SIZE solid transparent;
+    border-top: $TRIANGLE_SIZE solid $COLOR_TOOLTIP_BACKGROUND;
+  }
+
+  // 上に表示する
+  &.-top {
+    bottom: calc(100% + $TRIANGLE_SIZE);
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::before {
+      top: 100%;
+      left: 50%;
+    }
+  }
+
+  // 右に表示する
+  &.-right {
+    top: 50%;
+    left: calc(100% + $TRIANGLE_SIZE);
+    transform: translateY(-50%);
+
+    &::before {
+      top: calc(50% - $TRIANGLE_SIZE);
+      left: -$TRIANGLE_SIZE;
+      transform: rotate(90deg);
+    }
+  }
+}

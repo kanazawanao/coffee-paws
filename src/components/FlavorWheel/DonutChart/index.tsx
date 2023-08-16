@@ -3,10 +3,13 @@ import { Flavor } from '../flavor';
 import styles from './style.module.scss';
 
 type Props = {
+  width: number;
+  height: number;
   innerRadius: number;
   outerRadius: number;
   items: { value: number; color: string; flavor: Flavor }[];
   onFlavorClick: (flavor: Flavor) => void;
+  onMouseover: (flavor: Flavor) => void;
 };
 
 const getArcPath = (
@@ -36,10 +39,13 @@ const PROGRESS_UNIT = 0.01;
 const PROGRESS_TIMEOUT = 5;
 
 export default function DonutChart({
+  width,
+  height,
   items,
   innerRadius,
   outerRadius,
   onFlavorClick,
+  onMouseover,
 }: Props) {
   const [visiblePart, setVisiblePart] = React.useState(0);
   React.useEffect(() => {
@@ -63,8 +69,8 @@ export default function DonutChart({
   }, [innerRadius, items, outerRadius, visiblePart]);
 
   return (
-    <svg width={500} height={500}>
-      <g transform={`translate(${500 / 2},${500 / 2})`}>
+    <svg width={width} height={height}>
+      <g transform={`translate(${width / 2},${height / 2})`}>
         {segments.map((segment, index) => (
           <React.Fragment key={`${index}-${segment.color}`}>
             <path
@@ -74,13 +80,30 @@ export default function DonutChart({
               fill={segment.color}
               d={segment.path}
               onClick={() => onFlavorClick(segment.flavor)}
-            />
-            <text d={segment.path} className={styles.text} x='0'>
-              {segment.flavor}
-            </text>
+              onMouseOver={() => onMouseover(segment.flavor)}
+            >
+              <title>{segment.flavor}</title>
+            </path>
           </React.Fragment>
         ))}
       </g>
+      {segments.map((segment, index) => (
+        <text
+          key={`${index}-${segment.color}`}
+          className={styles.text}
+          transform={`translate(${width / 2},${height / 2})`}
+        >
+          <textPath
+            xlinkHref={`#${index}-${segment.color}`}
+            textAnchor='start'
+            dominantBaseline='hanging'
+            startOffset='5'
+            fill='white'
+          >
+            {segment.flavor}
+          </textPath>
+        </text>
+      ))}
     </svg>
   );
 }
