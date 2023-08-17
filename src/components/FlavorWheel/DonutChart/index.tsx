@@ -34,9 +34,6 @@ const getArcPath = (
       L ${x4},${y4} A ${innerRadius} ${innerRadius} ${innerFlags} ${x1},${y1} Z`;
 };
 
-const PROGRESS_UNIT = 0.01;
-const PROGRESS_TIMEOUT = 5;
-
 export default function DonutChart({
   width,
   height,
@@ -45,26 +42,29 @@ export default function DonutChart({
   outerRadius,
   onFlavorClick,
 }: Props) {
-  const [visiblePart, setVisiblePart] = React.useState(0);
-  React.useEffect(() => {
-    if (visiblePart < 1) {
-      setTimeout(
-        () => setVisiblePart(visiblePart + PROGRESS_UNIT),
-        PROGRESS_TIMEOUT,
-      );
-    }
-  }, [visiblePart]);
-
   const segments = React.useMemo(() => {
     const sum = items.reduce((sum, item) => sum + item.value, 0);
     let start = 0;
     return items.map((item) => {
-      const delta = (item.value / sum) * visiblePart;
+      const delta = item.value / sum;
       const path = getArcPath(start, start + delta, innerRadius, outerRadius);
+
+      const endAngle = (start + delta / 2) * Math.PI * 2;
+      const x3 = outerRadius * Math.sin(endAngle);
+      const x4 = innerRadius * Math.sin(endAngle);
+      const strPathx1 = outerRadius * Math.sin(endAngle);
+      const strPathy1 = outerRadius * -Math.cos(endAngle);
+      const strPathx2 = innerRadius * Math.sin(endAngle);
+      const strPathy2 = innerRadius * -Math.cos(endAngle);
+
+      // x4 -> x3にパスを書くとき、マイナス方向へ移動している場合は文字反転対象
+      const reverse = x4 + x3 < 0;
+      const strPath = `M ${strPathx2},${strPathy2}L ${strPathx1},${strPathy1}  Z`;
+
       start += delta;
-      return { ...item, path };
+      return { ...item, path, reverse, strPath };
     });
-  }, [innerRadius, items, outerRadius, visiblePart]);
+  }, [innerRadius, items, outerRadius]);
 
   return (
     <svg width={width} height={height}>
@@ -85,21 +85,32 @@ export default function DonutChart({
         ))}
       </g>
       {segments.map((segment, index) => (
-        <text
-          key={`${index}-${segment.color}`}
-          className={styles.text}
-          transform={`translate(${width / 2},${height / 2})`}
-        >
-          <textPath
-            xlinkHref={`#${index}-${segment.color}`}
+        <React.Fragment key={`${index}-${segment.color}-text-path`}>
+          <path
+            transform={`translate(${width / 2},${height / 2})`}
+            id={`${index}-${segment.color}-text-path`}
+            d={segment.strPath}
+          />
+          <text
+            key={`${index}-${segment.color}`}
+            className={styles.text}
             textAnchor='start'
-            dominantBaseline='hanging'
-            startOffset='5'
-            fill='white'
+            dominantBaseline='central'
           >
-            <tspan>{segment.flavor}</tspan>
-          </textPath>
-        </text>
+            <textPath
+              xlinkHref={`#${index}-${segment.color}-text-path`}
+              startOffset={5}
+            >
+              {segment.reverse ? (
+                <tspan rotate={180}>
+                  {segment.flavor.split('').reverse().join('')}
+                </tspan>
+              ) : (
+                <tspan>{segment.flavor}</tspan>
+              )}
+            </textPath>
+          </text>
+        </React.Fragment>
       ))}
     </svg>
   );
