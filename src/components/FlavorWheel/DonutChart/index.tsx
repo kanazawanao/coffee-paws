@@ -9,7 +9,6 @@ type Props = {
   outerRadius: number;
   items: { value: number; color: string; flavor: Flavor }[];
   onFlavorClick: (flavor: Flavor) => void;
-  onMouseover: (flavor: Flavor) => void;
 };
 
 const getArcPath = (
@@ -45,7 +44,6 @@ export default function DonutChart({
   innerRadius,
   outerRadius,
   onFlavorClick,
-  onMouseover,
 }: Props) {
   const [visiblePart, setVisiblePart] = React.useState(0);
   React.useEffect(() => {
@@ -80,7 +78,6 @@ export default function DonutChart({
               fill={segment.color}
               d={segment.path}
               onClick={() => onFlavorClick(segment.flavor)}
-              onMouseOver={() => onMouseover(segment.flavor)}
             >
               <title>{segment.flavor}</title>
             </path>
@@ -100,7 +97,7 @@ export default function DonutChart({
             startOffset='5'
             fill='white'
           >
-            {segment.flavor}
+            <tspan>{segment.flavor}</tspan>
           </textPath>
         </text>
       ))}
