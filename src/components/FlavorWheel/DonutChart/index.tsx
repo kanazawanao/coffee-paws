@@ -9,6 +9,7 @@ type Props = {
   outerRadius: number;
   items: { value: number; color: string; flavor: Flavor }[];
   onFlavorClick: (flavor: Flavor) => void;
+  outerText?: boolean;
 };
 
 const getArcPath = (
@@ -40,6 +41,7 @@ export default function DonutChart({
   items,
   innerRadius,
   outerRadius,
+  outerText = false,
   onFlavorClick,
 }: Props) {
   const segments = React.useMemo(() => {
@@ -52,19 +54,30 @@ export default function DonutChart({
       const endAngle = (start + delta / 2) * Math.PI * 2;
       const x3 = outerRadius * Math.sin(endAngle);
       const x4 = innerRadius * Math.sin(endAngle);
-      const strPathx1 = outerRadius * Math.sin(endAngle);
-      const strPathy1 = outerRadius * -Math.cos(endAngle);
-      const strPathx2 = innerRadius * Math.sin(endAngle);
-      const strPathy2 = innerRadius * -Math.cos(endAngle);
 
-      // x4 -> x3にパスを書くとき、マイナス方向へ移動している場合は文字反転対象
+      // x4 -> x3にパスを書くとき、マイナス方向へ移動している場合は文字反転対象とする
       const reverse = x4 + x3 < 0;
-      const strPath = `M ${strPathx2},${strPathy2}L ${strPathx1},${strPathy1}  Z`;
+
+      // 文字を書くための図形内部用の座標
+      const innerTextPathx1 = outerRadius * Math.sin(endAngle);
+      const innerTextPathy1 = outerRadius * -Math.cos(endAngle);
+      const innerTextPathx2 = innerRadius * Math.sin(endAngle);
+      const innerTextPathy2 = innerRadius * -Math.cos(endAngle);
+
+      // 文字を書くための図形外部用の座標
+      const outerTextPathx1 = (outerRadius + 80) * Math.sin(endAngle);
+      const outerTextPathy1 = (outerRadius + 80) * -Math.cos(endAngle);
+      const outerTextPathx2 = outerRadius * Math.sin(endAngle);
+      const outerTextPathy2 = outerRadius * -Math.cos(endAngle);
+
+      const strPath = outerText
+        ? `M ${outerTextPathx2},${outerTextPathy2} L ${outerTextPathx1},${outerTextPathy1} Z`
+        : `M ${innerTextPathx2},${innerTextPathy2} L ${innerTextPathx1},${innerTextPathy1} Z`;
 
       start += delta;
       return { ...item, path, reverse, strPath };
     });
-  }, [innerRadius, items, outerRadius]);
+  }, [innerRadius, items, outerRadius, outerText]);
 
   return (
     <svg width={width} height={height}>
@@ -95,11 +108,12 @@ export default function DonutChart({
             key={`${index}-${segment.color}`}
             className={styles.text}
             textAnchor='start'
-            dominantBaseline='central'
+            dominantBaseline='middle'
+            fill={outerText ? segment.color : 'white'}
           >
             <textPath
               xlinkHref={`#${index}-${segment.color}-text-path`}
-              startOffset={5}
+              startOffset={outerText ? 5 : 10}
             >
               {segment.reverse ? (
                 <tspan rotate={180}>

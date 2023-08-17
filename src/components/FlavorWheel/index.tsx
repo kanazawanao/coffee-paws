@@ -49,7 +49,7 @@ export default function FlavorWheel() {
           <DonutChart
             width={600}
             height={600}
-            innerRadius={20}
+            innerRadius={35}
             outerRadius={120}
             items={items}
             onFlavorClick={handleFlavorClick}
@@ -70,8 +70,9 @@ export default function FlavorWheel() {
             width={600}
             height={600}
             innerRadius={200}
-            outerRadius={280}
+            outerRadius={210}
             items={thirdItems}
+            outerText={true}
             onFlavorClick={handleFlavorClick}
           />
         </div>
