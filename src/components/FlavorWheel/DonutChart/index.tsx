@@ -110,6 +110,7 @@ export default function DonutChart({
             textAnchor='start'
             dominantBaseline='middle'
             fill={outerText ? segment.color : 'white'}
+            onClick={() => onFlavorClick(segment.flavor)}
           >
             <textPath
               xlinkHref={`#${index}-${segment.color}-text-path`}
