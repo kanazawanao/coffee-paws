@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flavor } from '../flavor';
+import { Flavor, FlavorJpLabel } from '../flavor';
 import styles from './style.module.scss';
 
 type Props = {
@@ -65,8 +65,8 @@ export default function DonutChart({
       const innerTextPathy2 = innerRadius * -Math.cos(endAngle);
 
       // 文字を書くための図形外部用の座標
-      const outerTextPathx1 = (outerRadius + 80) * Math.sin(endAngle);
-      const outerTextPathy1 = (outerRadius + 80) * -Math.cos(endAngle);
+      const outerTextPathx1 = (outerRadius + 100) * Math.sin(endAngle);
+      const outerTextPathy1 = (outerRadius + 100) * -Math.cos(endAngle);
       const outerTextPathx2 = outerRadius * Math.sin(endAngle);
       const outerTextPathy2 = outerRadius * -Math.cos(endAngle);
 
@@ -118,10 +118,10 @@ export default function DonutChart({
             >
               {segment.reverse ? (
                 <tspan rotate={180}>
-                  {segment.flavor.split('').reverse().join('')}
+                  {FlavorJpLabel[segment.flavor].split('').reverse().join('')}
                 </tspan>
               ) : (
-                <tspan>{segment.flavor}</tspan>
+                <tspan>{FlavorJpLabel[segment.flavor]}</tspan>
               )}
             </textPath>
           </text>

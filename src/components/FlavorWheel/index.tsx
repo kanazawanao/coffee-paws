@@ -1,41 +1,10 @@
 import React from 'react';
 import DonutChart from './DonutChart';
-import {
-  FirstFlavors,
-  FirstFlavorsColor,
-  FirstFlavorsCount,
-  Flavor,
-  SecondFlavors,
-  SecondFlavorsColor,
-  SecondFlavorsCount,
-  ThirdFlavors,
-  ThirdFlavorsColor,
-} from './flavor';
+import { Flavor, firstItems, secondItems, thirdItems } from './flavor';
 import styles from './style.module.scss';
 import Modal from 'components/Modal';
 import useFlavorWheel from './hook';
-
-const items = Object.values(FirstFlavors).map((flavor) => {
-  return {
-    value: FirstFlavorsCount[flavor],
-    color: FirstFlavorsColor[flavor],
-    flavor: flavor,
-  };
-});
-const secondItems = Object.values(SecondFlavors).map((flavor) => {
-  return {
-    value: SecondFlavorsCount[flavor],
-    color: SecondFlavorsColor[flavor],
-    flavor: flavor,
-  };
-});
-const thirdItems = Object.values(ThirdFlavors).map((flavor) => {
-  return {
-    value: 1,
-    color: ThirdFlavorsColor[flavor],
-    flavor: flavor,
-  };
-});
+import FlavorDescription from 'components/FlavorDescription';
 
 export default function FlavorWheel() {
   const [targetFlavor, setTargetFlavor] = React.useState<Flavor | null>(null);
@@ -45,8 +14,8 @@ export default function FlavorWheel() {
   const { width } = useFlavorWheel();
   const [maxWidth, setMaxWidth] = React.useState(0);
   React.useEffect(() => {
-    if (width < 650) {
-      setMaxWidth(width);
+    if (width < 700) {
+      setMaxWidth(width - 50);
     } else {
       setMaxWidth(650);
     }
@@ -59,9 +28,9 @@ export default function FlavorWheel() {
           <DonutChart
             width={maxWidth + 40}
             height={maxWidth + 40}
-            innerRadius={(maxWidth / 2) * 0.05}
+            innerRadius={(maxWidth / 2) * 0.1}
             outerRadius={(maxWidth / 2) * 0.4}
-            items={items}
+            items={firstItems}
             onFlavorClick={handleFlavorClick}
           />
         </div>
@@ -89,7 +58,7 @@ export default function FlavorWheel() {
       </div>
       {targetFlavor && (
         <Modal open={!!targetFlavor} onCloseClick={() => setTargetFlavor(null)}>
-          {targetFlavor}
+          <FlavorDescription flavor={targetFlavor} />
         </Modal>
       )}
     </>
