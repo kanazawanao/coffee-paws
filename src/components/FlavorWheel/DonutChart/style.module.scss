@@ -4,8 +4,11 @@
 }
 
 .text {
-  font-size: 8px;
+  font-size: 10px;
   color: white;
   cursor: pointer;
   pointer-events: auto;
+  @media screen and (max-width: 600px) {
+    font-size: 1.25vmin;
+  }
 }

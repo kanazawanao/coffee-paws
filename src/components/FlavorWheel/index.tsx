@@ -42,38 +42,45 @@ export default function FlavorWheel() {
   const handleFlavorClick = React.useCallback((flavor: Flavor) => {
     setTargetFlavor(flavor);
   }, []);
-  const {width, height} = useFlavorWheel();
-  console.log(width, height);
+  const { width } = useFlavorWheel();
+  const [maxWidth, setMaxWidth] = React.useState(0);
+  React.useEffect(() => {
+    if (width < 650) {
+      setMaxWidth(width);
+    } else {
+      setMaxWidth(650);
+    }
+  }, [width]);
 
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.inner}>
+        <div className={styles.donut}>
           <DonutChart
-            width={840}
-            height={840}
-            innerRadius={35}
-            outerRadius={200}
+            width={maxWidth + 40}
+            height={maxWidth + 40}
+            innerRadius={(maxWidth / 2) * 0.05}
+            outerRadius={(maxWidth / 2) * 0.4}
             items={items}
             onFlavorClick={handleFlavorClick}
           />
         </div>
-        <div className={styles.center}>
+        <div className={styles.donut}>
           <DonutChart
-            width={840}
-            height={840}
-            innerRadius={200}
-            outerRadius={300}
+            width={maxWidth + 40}
+            height={maxWidth + 40}
+            innerRadius={(maxWidth / 2) * 0.4}
+            outerRadius={(maxWidth / 2) * 0.75}
             items={secondItems}
             onFlavorClick={handleFlavorClick}
           />
         </div>
-        <div className={styles.outer}>
+        <div className={styles.donut}>
           <DonutChart
-            width={840}
-            height={840}
-            innerRadius={300}
-            outerRadius={310}
+            width={maxWidth + 40}
+            height={maxWidth + 40}
+            innerRadius={(maxWidth / 2) * 0.75}
+            outerRadius={(maxWidth / 2) * 0.8}
             items={thirdItems}
             outerText={true}
             onFlavorClick={handleFlavorClick}

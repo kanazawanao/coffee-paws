@@ -80,7 +80,7 @@ export default function DonutChart({
   }, [innerRadius, items, outerRadius, outerText]);
 
   return (
-    <svg width={width} height={height} viewBox='0, 0, 840, 840'>
+    <svg width={width} height={height}>
       <g transform={`translate(${width / 2},${height / 2})`}>
         {segments.map((segment, index) => (
           <React.Fragment key={`${index}-${segment.color}`}>

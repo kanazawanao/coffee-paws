@@ -1,16 +1,8 @@
-.outer {
+.donut {
   position: absolute;
   pointer-events: none;
-}
-
-.center {
-  position: absolute;
-  pointer-events: none;
-}
-
-.inner {
-  position: absolute;
-  pointer-events: none;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .container {
