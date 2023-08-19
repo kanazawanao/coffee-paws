@@ -13,6 +13,7 @@ import {
 } from './flavor';
 import styles from './style.module.scss';
 import Modal from 'components/Modal';
+import useFlavorWheel from './hook';
 
 const items = Object.values(FirstFlavors).map((flavor) => {
   return {
@@ -41,36 +42,38 @@ export default function FlavorWheel() {
   const handleFlavorClick = React.useCallback((flavor: Flavor) => {
     setTargetFlavor(flavor);
   }, []);
+  const {width, height} = useFlavorWheel();
+  console.log(width, height);
 
   return (
     <>
       <div className={styles.container}>
         <div className={styles.inner}>
           <DonutChart
-            width={600}
-            height={600}
+            width={840}
+            height={840}
             innerRadius={35}
-            outerRadius={120}
+            outerRadius={200}
             items={items}
             onFlavorClick={handleFlavorClick}
           />
         </div>
         <div className={styles.center}>
           <DonutChart
-            width={600}
-            height={600}
-            innerRadius={120}
-            outerRadius={200}
+            width={840}
+            height={840}
+            innerRadius={200}
+            outerRadius={300}
             items={secondItems}
             onFlavorClick={handleFlavorClick}
           />
         </div>
         <div className={styles.outer}>
           <DonutChart
-            width={600}
-            height={600}
-            innerRadius={200}
-            outerRadius={210}
+            width={840}
+            height={840}
+            innerRadius={300}
+            outerRadius={310}
             items={thirdItems}
             outerText={true}
             onFlavorClick={handleFlavorClick}
