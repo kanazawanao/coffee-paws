@@ -14,6 +14,13 @@ export function useCoffeePawsNavigate() {
   }, [navigate]);
 
   /**
+   * トップページへ遷移する
+   */
+  const goToStoresPage = React.useCallback(() => {
+    navigate(paths.StoresPagePath);
+  }, [navigate]);
+
+  /**
    * サインインページへ遷移する
    */
   const goToSignInPage = React.useCallback(() => {
@@ -29,6 +36,7 @@ export function useCoffeePawsNavigate() {
 
   return {
     goToTopPage,
+    goToStoresPage,
     goToSignInPage,
     goToSignUpPage,
   };

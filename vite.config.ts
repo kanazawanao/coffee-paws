@@ -13,6 +13,7 @@ export default defineConfig({
       icons: path.resolve(__dirname, 'src/icons'),
       models: path.resolve(__dirname, 'src/models'),
       pages: path.resolve(__dirname, 'src/pages'),
+      root: path.resolve(__dirname, 'src/'),
       routes: path.resolve(__dirname, 'src/routes'),
       styles: path.resolve(__dirname, 'src/styles'),
     },

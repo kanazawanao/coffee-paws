@@ -1,0 +1,99 @@
+@use 'styles/z-index' as Z_INDEX;
+
+$height-header: 48px + 1px;
+$footer-height: 72px;
+$width-panel: 560px;
+$tablet-width: 768px;
+
+.header {
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  justify-content: space-between;
+  padding: 16px;
+
+  @media screen and (max-width: $tablet-width) {
+    margin-bottom: initial;
+  }
+}
+
+@keyframes bg-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.background {
+  animation: bg-fade-in 0.1s;
+  background-color: #fff;
+  background-color: rgb(2 2 2 / 30%);
+  content: '';
+  height: calc(100% - $height-header);
+  left: 0px;
+  position: absolute;
+  top: $height-header;
+  width: 100%;
+  z-index: Z_INDEX.$side-panel;
+
+  @media screen and (max-width: $tablet-width) {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-pc {
+  0% {
+    opacity: 0;
+    right: -128px;
+  }
+
+  100% {
+    opacity: 1;
+    right: 0px;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    top: calc($height-header + 312px);
+  }
+
+  100% {
+    opacity: 1;
+    top: $height-header;
+  }
+}
+
+.container {
+  animation: fade-in-pc 0.1s;
+  background-color: #fff;
+  height: calc(100% - $height-header);
+  position: absolute;
+  right: 0px;
+  top: $height-header;
+  width: $width-panel;
+
+  // DOMの出力順に関わらず常に前面に表示させるために z-index を指定する
+  z-index: Z_INDEX.$side-panel;
+
+  @media screen and (max-width: $tablet-width) {
+    animation: fade-in 0.1s;
+    width: 100%;
+  }
+}
+
+.contents {
+  height: calc(100% - $height-header - 40px);
+  overflow: auto;
+  padding: 16px;
+
+  &.-has-footer {
+    height: calc(100% - $height-header - $footer-height - 40px);
+  }
+}

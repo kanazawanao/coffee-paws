@@ -1,9 +1,11 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from 'config/firebase';
 import React from 'react';
+import { useAuthApiActions, useSelectAuthState } from './redux';
 
 export function useAuthApiState() {
-  const [user, setUser] = React.useState('');
+  const { user } = useSelectAuthState();
+  const { setUser } = useAuthApiActions();
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -13,10 +15,12 @@ export function useAuthApiState() {
         setUser('');
       }
     });
-  }, []);
+  }, [setUser]);
 
   return {
     user,
     setUser,
   };
 }
+
+export type AuthApiState = ReturnType<typeof useAuthApiState>;

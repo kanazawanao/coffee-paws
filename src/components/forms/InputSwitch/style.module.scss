@@ -1,0 +1,47 @@
+.switch {
+  display: inherit;
+  width: 100%;
+
+  .control {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: 0.875rem;
+    justify-content: space-between;
+    margin: 0 16px;
+
+    &.-disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .slide-wrapper {
+    align-items: center;
+    background-color: #e8e8e8;
+    border-radius: 34px;
+    display: flex;
+    height: 32px;
+    transition: 0.2s;
+    width: 50px;
+
+    .slider {
+      background-color: white;
+      border-radius: 50%;
+      height: 26px;
+      margin: 2px;
+      transition: 0.2s;
+      width: 26px;
+    }
+
+    &.-checked {
+      background-color: #222;
+
+      .slider {
+        transform: translateX(19px);
+      }
+    }
+    &.-disabled {
+      background-color: #e8e8e8;
+    }
+  }
+}
