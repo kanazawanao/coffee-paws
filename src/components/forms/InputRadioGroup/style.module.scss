@@ -1,0 +1,27 @@
+.radioGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 8px 0;
+  user-select: none;
+
+  .radioButton {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+
+    .label {
+      cursor: pointer;
+      margin-left: 16px;
+    }
+
+    &.-disabled {
+      cursor: not-allowed;
+
+      .label {
+        color: #b5b5b5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

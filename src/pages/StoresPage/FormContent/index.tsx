@@ -1,48 +1,79 @@
 import Button from 'components/Button';
 import GridContainer from 'components/GridContainer';
 import Form from 'components/forms/Form';
-import InputSwitch from 'components/forms/InputSwitch';
+import InputRadioGroup from 'components/forms/InputRadioGroup';
 import InputText from 'components/forms/InputText';
+import Store from 'models/Store';
 import React from 'react';
 
 type Props = {
-  onSubmit: (storeName: string, address: string, url: string) => void;
+  onSubmit: (store: Store) => void;
 };
 
 export default function FormContent({ onSubmit }: Props) {
-  const [checked, setChecked] = React.useState(false);
+  const [storeType, setStoreType] = React.useState('store');
   const [storeName, setStoreName] = React.useState('');
   const [address, setAddress] = React.useState('');
   const [url, setUrl] = React.useState('');
 
   const handleSubmit = React.useCallback(() => {
-    onSubmit(storeName, address, url);
-  }, [address, onSubmit, storeName, url]);
+    const store: Store = {
+      id: '',
+      name: storeName,
+      storeType: storeType,
+      address: address,
+      url: url,
+    };
+    onSubmit(store);
+  }, [address, onSubmit, storeName, storeType, url]);
 
   return (
     <Form onSubmit={handleSubmit}>
       <GridContainer>
-        <InputSwitch
+        <InputRadioGroup
+          options={[
+            { label: '実店舗', value: 'store' },
+            { label: 'ECサイト', value: 'ec_store' },
+          ]}
+          selectedValue={storeType}
+          onChange={setStoreType}
           id='storeType'
-          label='お店のタイプ'
-          checked={checked}
-          enabledLabel='ECサイト'
-          disabledLabel='Web'
-          onChange={setChecked}
+          label='お店の種類'
         />
-        <InputText
-          id='storeName'
-          type='text'
-          label='店名 or サイト名'
-          onChange={setStoreName}
-        />
-        <InputText
-          id='address'
-          type='text'
-          label='お店の住所'
-          onChange={setAddress}
-        />
-        <InputText id='url' type='text' label='サイトのURL' onChange={setUrl} />
+        {storeType === 'store' && (
+          <>
+            <InputText
+              id='storeName'
+              type='text'
+              label='店名'
+              onChange={setStoreName}
+            />
+
+            <InputText
+              id='address'
+              type='text'
+              label='お店の住所'
+              onChange={setAddress}
+            />
+          </>
+        )}
+        {storeType === 'ec_store' && (
+          <>
+            <InputText
+              id='storeName'
+              type='text'
+              label='サイト名'
+              onChange={setStoreName}
+            />
+            <InputText
+              id='url'
+              type='text'
+              label='サイトのURL'
+              onChange={setUrl}
+            />
+          </>
+        )}
+
         <Button type='submit'>お店登録</Button>
       </GridContainer>
     </Form>

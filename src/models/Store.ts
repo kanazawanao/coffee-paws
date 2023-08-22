@@ -1,6 +1,6 @@
 export default interface Place {
   id: string;
-  placeId: string;
+  storeType: string;
   name: string;
   address: string;
   url: string;

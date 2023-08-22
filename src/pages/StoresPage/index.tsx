@@ -5,7 +5,7 @@ import React from 'react';
 import FormContent from './FormContent';
 
 export default function StoresPage() {
-  const { stores } = useStoresApi();
+  const { stores, createStore } = useStoresApi();
   const [openSidePanel, setOpenSidePanel] = React.useState(false);
   return (
     <>
@@ -18,7 +18,7 @@ export default function StoresPage() {
           title='お店の新規登録'
           onClose={() => setOpenSidePanel(false)}
         >
-          <FormContent onSubmit={() => console.log('登録')} />
+          <FormContent onSubmit={createStore} />
         </SidePanel>
       )}
     </>
