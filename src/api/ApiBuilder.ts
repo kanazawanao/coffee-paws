@@ -3,7 +3,6 @@ import { auth } from 'config/firebase';
 
 const buildCoffeePawsApi = async (basePath: string) => {
   const token = await auth.currentUser?.getIdToken();
-  console.log(token);
   const config = new Configuration({
     basePath: basePath,
     baseOptions: {

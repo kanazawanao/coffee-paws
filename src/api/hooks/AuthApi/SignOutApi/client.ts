@@ -4,7 +4,6 @@ import { auth } from 'config/firebase';
 
 class SignOutApiClient extends ApiClient {
   async signOut() {
-    console.log('signout');
     await signOutFromFirebase(auth);
   }
 }

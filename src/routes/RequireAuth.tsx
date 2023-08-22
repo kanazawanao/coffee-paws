@@ -7,7 +7,6 @@ export default function RequireAuth() {
   const { goToSignInPage } = useCoffeePawsNavigate();
 
   const { user } = useAuthApi();
-  console.log(user);
 
   React.useEffect(() => {
     if (!user) {

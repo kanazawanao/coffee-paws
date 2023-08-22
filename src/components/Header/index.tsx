@@ -2,7 +2,6 @@ import { useAuthApi } from 'api/hooks/AuthApi';
 import styles from './style.module.scss';
 import { useCoffeePawsNavigate } from 'routes/hook';
 import MenuIcon from 'icons/MenuIcon';
-import IconButton from 'components/IconButton';
 import React from 'react';
 import SubMenu from 'components/SubMenu';
 
@@ -26,7 +25,7 @@ function menusToSubMenus(menus: Menu[]) {
 
 export default function Header() {
   const { user, signOut } = useAuthApi();
-  const { goToSignInPage, goToSignUpPage, goToStoresPage } =
+  const { goToSignInPage, goToSignUpPage, goToStoresPage, goToTopPage } =
     useCoffeePawsNavigate();
   const handleMenuClick = React.useCallback(
     (menu: Menu) => {
@@ -57,11 +56,11 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <SubMenu menus={menus} onClick={handleMenuClick}>
-        <IconButton onClick={() => console.log('iconbutton')}>
-          <MenuIcon />
-        </IconButton>
+        <MenuIcon />
       </SubMenu>
-      <div className={styles.title}>Coffee Paws</div>
+      <div onClick={goToTopPage} className={styles.title}>
+        Coffee Paws
+      </div>
     </div>
   );
 }
