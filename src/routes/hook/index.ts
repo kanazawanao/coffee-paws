@@ -34,10 +34,31 @@ export function useCoffeePawsNavigate() {
     navigate(paths.SignUpPagePath);
   }, [navigate]);
 
+  /*
+   * 遷移前の情報を保持した状態でサインインページへ遷移する
+   */
+  const goToSignInPageWithFrom = React.useCallback(() => {
+    console.log(location.pathname, location.search);
+    navigate(paths.SignInPagePath, {
+      state: {
+        from: `${location.pathname}${location.search}`,
+      },
+    });
+  }, [navigate]);
+
+  const goToPage = React.useCallback(
+    (path: string) => {
+      navigate(path);
+    },
+    [navigate],
+  );
+
   return {
     goToTopPage,
     goToStoresPage,
     goToSignInPage,
     goToSignUpPage,
+    goToSignInPageWithFrom,
+    goToPage,
   };
 }

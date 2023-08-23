@@ -4,15 +4,15 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 export default function RequireAuth() {
-  const { goToSignInPage } = useCoffeePawsNavigate();
+  const { goToSignInPageWithFrom } = useCoffeePawsNavigate();
 
   const { user } = useAuthApi();
 
   React.useEffect(() => {
     if (!user) {
-      goToSignInPage();
+      goToSignInPageWithFrom();
     }
-  }, [goToSignInPage, user]);
+  }, [goToSignInPageWithFrom, user]);
 
   if (!user) return <></>;
 
