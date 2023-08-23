@@ -7,12 +7,11 @@ const buildCoffeePawsApi = async (basePath: string) => {
     basePath: basePath,
     baseOptions: {
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Coffee-Paws-Auth-Token': `Bearer ${token}`,
       },
     },
   });
-  const coffeePawsApi = new CoffeePawsApi(config);
-  return coffeePawsApi;
+  return new CoffeePawsApi(config);
 };
 
 export default {
