@@ -4,11 +4,20 @@ import SidePanel from 'components/SidePanel';
 import React from 'react';
 import FormContent from './FormContent';
 import { useCoffeePawsNavigate } from 'routes/hook';
+import Store from 'models/Store';
 
 export default function StoresPage() {
   const { goToStorePage } = useCoffeePawsNavigate();
   const { stores, createStore } = useStoresApi();
   const [openSidePanel, setOpenSidePanel] = React.useState(false);
+
+  const handleSubmit = React.useCallback(
+    (store: Store) => {
+      createStore(store);
+      setOpenSidePanel(false);
+    },
+    [createStore],
+  );
   return (
     <>
       {stores.map((store) => (
@@ -22,7 +31,7 @@ export default function StoresPage() {
           title='お店の新規登録'
           onClose={() => setOpenSidePanel(false)}
         >
-          <FormContent onSubmit={createStore} />
+          <FormContent onSubmit={handleSubmit} />
         </SidePanel>
       )}
     </>
