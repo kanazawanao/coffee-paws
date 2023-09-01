@@ -13,6 +13,7 @@ export function fromApiStore(apiStore: ApiStore): Store {
     url: apiStore.url,
   };
 }
+
 export function toApiStore(store: Store): ApiStoreRequest {
   return {
     name: store.name,

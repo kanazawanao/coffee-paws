@@ -3,6 +3,7 @@ import {
   RootPath,
   SignInPagePath,
   SignUpPagePath,
+  StorePagePath,
   StoresPagePath,
 } from './paths';
 import React from 'react';
@@ -12,6 +13,7 @@ const TopPage = React.lazy(() => import('pages/TopPage'));
 const SignInPage = React.lazy(() => import('pages/SignInPage'));
 const SignUpPage = React.lazy(() => import('pages/SignUpPage'));
 const StoresPage = React.lazy(() => import('pages/StoresPage'));
+const StorePage = React.lazy(() => import('pages/StorePage'));
 
 export default function AppRoutes() {
   return (
@@ -21,6 +23,7 @@ export default function AppRoutes() {
       <Route path={SignUpPagePath} element={<SignUpPage />} />
       <Route path='/me' element={<RequireAuth />}>
         <Route path={StoresPagePath} element={<StoresPage />} />
+        <Route path={StorePagePath} element={<StorePage />} />
       </Route>
     </Routes>
   );

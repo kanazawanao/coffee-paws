@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 
 import * as paths from '../paths';
 import React from 'react';
@@ -14,11 +14,25 @@ export function useCoffeePawsNavigate() {
   }, [navigate]);
 
   /**
-   * トップページへ遷移する
+   * ストア一覧ページへ遷移する
    */
   const goToStoresPage = React.useCallback(() => {
     navigate(paths.StoresPagePath);
   }, [navigate]);
+
+  /**
+   * ストア詳細ページへ遷移する
+   */
+  const goToStorePage = React.useCallback(
+    (id: string) => {
+      navigate(
+        generatePath(paths.StorePagePath, {
+          id,
+        }),
+      );
+    },
+    [navigate],
+  );
 
   /**
    * サインインページへ遷移する
@@ -38,7 +52,6 @@ export function useCoffeePawsNavigate() {
    * 遷移前の情報を保持した状態でサインインページへ遷移する
    */
   const goToSignInPageWithFrom = React.useCallback(() => {
-    console.log(location.pathname, location.search);
     navigate(paths.SignInPagePath, {
       state: {
         from: `${location.pathname}${location.search}`,
@@ -56,6 +69,7 @@ export function useCoffeePawsNavigate() {
   return {
     goToTopPage,
     goToStoresPage,
+    goToStorePage,
     goToSignInPage,
     goToSignUpPage,
     goToSignInPageWithFrom,

@@ -3,9 +3,9 @@ import { client } from './client';
 import { StoresApiState } from '../state';
 
 export function useSearchStoresApi({ setStores }: StoresApiState) {
-  const { callApi } = useApiClient(client.getStores, setStores);
+  const { callApi } = useApiClient(client.searchStores, setStores);
 
   return {
-    getStores: callApi,
+    searchStores: callApi,
   };
 }
